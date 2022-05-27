@@ -19,3 +19,11 @@ This is server site
 * stripe
 
 ## this site host in heroku
+
+## Short Description 
+this website has 6 services
+it has login form and register form
+Order ,Delete , Price services are available
+IN website we show has some dynamic review
+users can register and login
+users can see dashbord in details when then click details button
