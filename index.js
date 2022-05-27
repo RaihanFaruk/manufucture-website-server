@@ -86,4 +86,12 @@ const run = async () => {
                 $set: user,
             };
             const result = await userCollenction.updateOne(filter, updateDoc, options);
-    
+            const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '3h' })
+            res.send({ result, token });
+        });
+
+        app.get('/user/:email', async (req, res) => {
+            const email = req.params.email;
+            const filter = { email: email };
+            const user = await userCollenction.findOne(filter);
+            res.send(user);
