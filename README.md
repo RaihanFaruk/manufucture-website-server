@@ -1,4 +1,4 @@
-# iCraft An Handi Craft Online Shopp
+# Craft Online Shopp
 
 This is server site
 
