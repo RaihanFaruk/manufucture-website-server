@@ -257,7 +257,7 @@ const run = async () => {
 
     }
     catch {
-         client.close();
+        //  client.close();
     }
 }
 run().catch(console.dir);
