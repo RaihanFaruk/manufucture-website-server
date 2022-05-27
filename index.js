@@ -268,5 +268,5 @@ app.listen(port, () => {
 })
 
 app.get('/', (req, res) => {
-    res.send('Hello! I am from china manufucture & server.')
+    res.send('Hello! I am from china manufucture server.')
 })
