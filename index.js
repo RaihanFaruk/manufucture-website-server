@@ -179,5 +179,19 @@ const run = async () => {
         
                     const result = await paymentCollenction.insertOne(payment);
                     const updatedOrder = await orderCollenction.updateOne(filter, updatedDoc);
-                    res.send(updatedOrder);t);
+                    res.send(updatedOrder);t);           const updatedOrder = await orderCollenction.updateOne(filter, updatedDoc);
+                    res.send(updatedOrder);
+                })
+        
+                app.delete('/orders/:id', verifyJWT, async (req, res) => {
+                    const id = req.params.id;
+                    const filter = { _id: ObjectId(id) };
+                    const result = await orderCollenction.deleteOne(filter);
+                    res.send(result);
+                })
+        
+                app.post('/product', verifyJWT, async (req, res) => {
+                    const product = req.body;
+                    const result = await productCollenction.insertOne(product);
+                    res.send(result);
             res.send(user);
