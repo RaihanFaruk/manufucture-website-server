@@ -78,5 +78,12 @@ const run = async () => {
                 const query = { _id: ObjectId(id) };
                 const product = await productCollenction.findOne(query)
                 res.send(product)
-            })
+            })     const email = req.params.email;
+            const user = req.body;
+            const filter = { email: email };
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: user,
+            };
+            const result = await userCollenction.updateOne(filter, updateDoc, options);
     
