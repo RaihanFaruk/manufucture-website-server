@@ -35,3 +35,16 @@ const emailSenderOptions = {
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.jlzrp.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+const run = async () => {
+
+    try {
+        await client.connect();
+        const productCollenction = client.db("ToolsStock").collection("products");
+        const userCollenction = client.db("ToolsStock").collection("users");
+        const reviewCollenction = client.db("ToolsStock").collection("reviews");
+        const orderCollenction = client.db("ToolsStock").collection("orders");
+        const paymentCollenction = client.db("ToolsStock").collection("payments");
+
+        const verifyAdmin = async (req, res, next) => {
+            const requester = req.decoded.email;
+            const requesterAccount = await userCollenction.findOne({ email: requester });
