@@ -93,5 +93,14 @@ const run = async () => {
         app.get('/user/:email', async (req, res) => {
             const email = req.params.email;
             const filter = { email: email };
-            const user = await userCollenction.findOne(filter);
+            const user = await userCollenction.findOne(filter);app.put('/user/:email', async (req, res) => {
+                const email = req.params.email;
+                const profile = req.body;
+                const filter = { email: email };
+                const options = { upsert: true };
+                const updateDoc = {
+                    $set: profile,
+                };
+                const result = await userCollenction.updateOne(filter, updateDoc, options);
+                res.send(result);
             res.send(user);
