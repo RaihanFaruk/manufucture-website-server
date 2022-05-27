@@ -48,7 +48,6 @@ const run = async () => {
 
     try {
         await client.connect();
-        console.log("uri");
         const productCollenction = client.db("ToolsStock").collection("products");
         const userCollenction = client.db("ToolsStock").collection("users");
         const reviewCollenction = client.db("ToolsStock").collection("reviews");
