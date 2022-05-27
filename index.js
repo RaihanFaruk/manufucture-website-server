@@ -102,5 +102,82 @@ const run = async () => {
                     $set: profile,
                 };
                 const result = await userCollenction.updateOne(filter, updateDoc, options);
-                res.send(result);
+                res.send(resul   app.get('/users', async (req, res) => {
+                    const query = {};
+                    const users = await userCollenction.find(query).toArray();
+                    res.send(users)
+                })
+        
+                app.put('/users/:id', verifyJWT, async (req, res) => {
+                    const id = req.params.id;
+                    const role = req.body;
+                    const filter = { _id: ObjectId(id) };
+                    const options = { upsert: true };
+                    const updatedDoc = {
+                        $set: role
+                    }
+                    const updatedUser = await userCollenction.updateOne(filter, updatedDoc, options);
+                    res.send(updatedUser);
+                })
+        
+        
+                app.post('/order', verifyJWT, async (req, res) => {
+                    const order = req.body;
+                    const result = await orderCollenction.insertOne(order);
+                    res.send(result);
+                });
+        
+                app.get('/orders', verifyJWT, async (req, res) => {
+                    const email = req.query.email;
+                    const decodedEmail = req.decoded.email;
+                    if (email === decodedEmail) {
+                        const query = { email: email };
+                        const orders = await orderCollenction.find(query).toArray();
+                        return res.send(orders);
+                    }
+                    else {
+                        return res.status(403).send({ message: 'forbidden access' });
+                    }
+                });
+        
+                app.get('/allorders', async (req, res) => {
+                    const query = {};
+                    const orders = await orderCollenction.find(query).toArray();
+                    console.log(orders);
+                    res.send(orders)
+                })
+        
+                app.patch('/paidorders/:id', verifyJWT, async (req, res) => {
+                    const id = req.params.id;
+                    const filter = { _id: ObjectId(id) };
+                    const updatedDoc = {
+                        $set: {
+                            deleverd: true,
+                        }
+                    }
+                    const updatedOrder = await orderCollenction.updateOne(filter, updatedDoc);
+                    res.send(updatedOrder);
+                })
+        
+                app.get('/orders/:id', verifyJWT, async (req, res) => {
+                    const id = req.params.id;
+                    const query = { _id: ObjectId(id) };
+                    const order = await orderCollenction.findOne(query)
+                    res.send(order)
+                })
+        
+                app.patch('/orders/:id', verifyJWT, async (req, res) => {
+                    const id = req.params.id;
+                    const payment = req.body;
+                    const filter = { _id: ObjectId(id) };
+                    const updatedDoc = {
+                        $set: {
+                            paid: true,
+                            transactionId: payment.transactionId
+                        }
+                    }
+        
+                    const result = await paymentCollenction.insertOne(payment);
+                    const updatedOrder = await orderCollenction.updateOne(filter, updatedDoc);
+                    res.send(updatedOrder);t);
             res.send(user);
