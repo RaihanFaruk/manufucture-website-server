@@ -194,4 +194,21 @@ const run = async () => {
                     const product = req.body;
                     const result = await productCollenction.insertOne(product);
                     res.send(result);
-            res.send(user);
+            res.send(user); app.put('/product/:id', async (req, res) => {
+                const id = req.params.id;
+                const stock = req.body;
+                const filter = { _id: id };
+                const options = { upsert: true };
+                const updateDoc = {
+                    $set: stock,
+                };
+                const result = await productCollenction.updateOne(filter, updateDoc, options);
+                res.send(result);
+            });
+    
+            app.delete('/product/:id', verifyJWT, async (req, res) => {
+                const id = req.params.id;
+                const filter = { _id: ObjectId(id) };
+                const result = await productCollenction.deleteOne(filter);
+                res.send(result);
+            })
