@@ -1,4 +1,4 @@
-# Craft Online Shopp
+# China Manufucture Online Shopp
 
 This is server site
 
@@ -18,7 +18,7 @@ This is server site
 
 * stripe
 
-## this site host in heroku
+## this site host in -heroku
 
 ## Short Description 
 this website has 6 services
