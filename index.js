@@ -45,6 +45,7 @@ const run = async () => {
 
     try {
         await client.connect();
+        console.log(con);
         const productCollenction = client.db("ToolsStock").collection("products");
         const userCollenction = client.db("ToolsStock").collection("users");
         const reviewCollenction = client.db("ToolsStock").collection("reviews");
