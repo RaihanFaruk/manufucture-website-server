@@ -38,14 +38,15 @@ const emailSenderOptions = {
     }
 }
 
-const uri = "mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.jlzrp.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.jlzrp.mongodb.net/?retryWrites=true&w=majority`;
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 const run = async () => {
 
     try {
         await client.connect();
-        console.log(con);
+        console.log("uri");
         const productCollenction = client.db("ToolsStock").collection("products");
         const userCollenction = client.db("ToolsStock").collection("users");
         const reviewCollenction = client.db("ToolsStock").collection("reviews");
@@ -75,7 +76,7 @@ const run = async () => {
             res.send({ clientSecret: paymentIntent.client_secret })
         });
 
-        app.get('/products', async (req, res) => {
+        app.get('/product', async (req, res) => {
             const query = {};
             const products = await productCollenction.find(query).toArray();
             res.send(products)
@@ -260,9 +261,9 @@ run().catch(console.dir);
 
 
 app.listen(port, () => {
-    console.log('Tool veritiese server is running in port', port);
+    console.log('china manufucture server is running in port', port);
 })
 
 app.get('/', (req, res) => {
-    res.send('Hello! I am from Tool veritiese & server.')
+    res.send('Hello! I am from china manufucture & server.')
 })
